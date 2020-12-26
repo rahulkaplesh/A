@@ -7,13 +7,13 @@ template <class T>
 class Stack {
    T data;
    std::unique_ptr<Stack<T>> next;
+   bool empty;
 public:
-   Stack(T data);
-   bool push(T data);
+   Stack(T aData);
+   bool push(T aData);
    T pop();
    bool isEmpty();
    T peek();
-   bool assignToNext(std::unique_ptr<Stack<T>>& aNext);
 };
 
 #endif

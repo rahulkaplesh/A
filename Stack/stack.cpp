@@ -2,23 +2,23 @@
 #include <stack.hpp>
 
 template <class T>
-Stack<T>::Stack(T data) {
-   data = data;
+Stack<T>::Stack(T aData) {
+   data = aData;
+   empty = false;
 }
 
 template <class T>
-bool Stack<T>::push(T data) {
+bool Stack<T>::push(T aData) {
    if (next != nullptr) {
-      next = std::make_unique<Stack<T>>(data);
-      return true;
+      next->push(data);
    } else {
-      return next->push(data);
+      if (empty == false) {
+         next = std::make_unique<Stack<T>>(data);
+      } else {
+         empty = false;
+      }
    }
-}
-
-template <class T>
-bool Stack<T>::assignToNext(std::unique_ptr<Stack<T>>& aNext) {
-   aNext = std::move(next);
+   data = aData;
 }
 
 template <class T>
@@ -26,25 +26,25 @@ T Stack<T>::pop() {
    T dataToBeReturned = data;
    if (next != nullptr) {
       data = next->pop();
-      next->assignToNext(next);
+      if (next->isEmpty() == true ) {
+         next.reset();
+      }
    } else {
-      data = T();
+      empty = true;
    }
    return dataToBeReturned;
 }
 
 template <class T>
 T Stack<T>::peek() {
-   return data;
+   if (empty == false) {
+      return data;
+   }
 }
 
 template <class T>
 bool Stack<T>::isEmpty() {
-   if (data == T()) {
-      return true;
-   } else {
-      return false;
-   }
+   return empty;
 }
 
 // Currently have freezed implementation to these data types

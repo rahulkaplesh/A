@@ -17,6 +17,11 @@
             "label": "Get Profiling Data",
             "type": "shell",
             "command": "gprof main"
+        },
+        {
+            "label": "RUN TESTS",
+            "type": "shell",
+            "command": "bin/main_test"
         }
     ]
  }
