@@ -5,12 +5,15 @@
 
 template <class T>
 class Queue {
-   T data;
-   std::unique_ptr<Queue<T>> next;
-   bool empty;
+   struct Node {
+      T data;
+      std::shared_ptr<Node> next;
+   };
+   std::shared_ptr<Node> head;
+   std::shared_ptr<Node> tail;
 public:
    Queue(T aData);
-   bool enqueue(T aData);
+   void enqueue(T aData);
    T dequeue();
    bool isEmpty();
    T peek();

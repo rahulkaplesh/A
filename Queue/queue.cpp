@@ -4,54 +4,63 @@
 
 template <class T>
 Queue<T>::Queue(T aData) {
-   data = aData;
-   empty = false;
+   head = std::make_shared<Queue<T>::Node>();
+   head->data = aData;
+   tail = head;
 }
 
 template <class T>
-bool Queue<T>::enqueue(T aData) {
-   bool added = true;
-   if (next != nullptr) {
-      added &= next->enqueue(aData);
-   } else {
-      if (empty == false) {
-         next = std::make_unique<Queue<T>>(aData);
-      } else {
-         empty = false;
-         data = aData;
-      }
+void Queue<T>::enqueue(T aData) {
+   if (head == nullptr) {
+      head = std::make_shared<Queue<T>::Node>();
+      head->data = aData;
+      tail = head;
    }
-   return added;
+   if (head == tail) {
+      head->next = std::make_shared<Queue<T>::Node>();
+      tail = head->next;
+      tail->data = aData;
+   } else {
+      tail->next = std::make_shared<Queue<T>::Node>();
+      tail = tail->next;
+      tail->data = aData;
+   }
 }
 
 template <class T>
 T Queue<T>::dequeue() {
-   if (empty == true) {
+   if (head == nullptr) {
       std::cout << "Queue is empty !!" << std::endl;
       return T();
    }
-   T dataToBeReturned = data;
-   if (next != nullptr) {
-      data = next->dequeue();
-      if (next->isEmpty() == true) {
-         next.reset();
-      }
+   T dataToBeReturned = head->data;
+   if (head == tail) {
+      head.reset();
+      tail.reset();
    } else {
-      empty = true;
+      if(head->next == tail) {
+         head = tail;
+      } else {
+         head = head->next;
+      }
    }
    return dataToBeReturned;
 }
 
 template <class T>
 T Queue<T>::peek() {
-   if (empty == false) {
-      return data;
+   if (head != nullptr) {
+      return head->data;
    }
 }
 
 template <class T>
 bool Queue<T>::isEmpty() {
-   return empty;
+   if (head == nullptr) {
+      return true;
+   } else {
+      return false;
+   }
 }
 
 // Currently have freezed implementation to these data types

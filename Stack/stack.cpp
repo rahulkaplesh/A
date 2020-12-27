@@ -4,54 +4,50 @@
 
 template <class T>
 Stack<T>::Stack(T aData) {
-   data = aData;
-   empty = false;
+   head = std::make_unique<Stack<T>::Node>();
+   head->data = aData;
 }
 
 template <class T>
-bool Stack<T>::push(T aData) {
-   bool added = true;
-   if (next != nullptr) {
-      added &= next->push(data);
-   } else {
-      if (empty == false) {
-         next = std::make_unique<Stack<T>>(data);
-      } else {
-         empty = false;
-      }
+void Stack<T>::push(T aData) {
+   std::unique_ptr<Stack<T>::Node> currentData = std::make_unique<Stack<T>::Node>();
+   currentData->data = aData;
+   if (head != nullptr) {
+      currentData->next = std::move(head);
    }
-   data = aData;
-   return added;
+   head = std::move(currentData);
 }
 
 template <class T>
 T Stack<T>::pop() {
-   if (empty == true) {
+   if (head == nullptr) {
       std::cout << "Stack is empty" << std::endl;
       return T();
-   }
-   T dataToBeReturned = data;
-   if (next != nullptr) {
-      data = next->pop();
-      if (next->isEmpty() == true ) {
-         next.reset();
-      }
    } else {
-      empty = true;
+      T dataToBeReturned = head->data;
+      if (head->next != nullptr) {
+         head = std::move(head->next);
+      } else {
+         head.reset();
+      }
+      return dataToBeReturned;
    }
-   return dataToBeReturned;
 }
 
 template <class T>
 T Stack<T>::peek() {
-   if (empty == false) {
-      return data;
+   if (head != nullptr) {
+      return head->data;
    }
 }
 
 template <class T>
 bool Stack<T>::isEmpty() {
-   return empty;
+   if (head == nullptr) {
+      return true;
+   } else {
+      return false;
+   }
 }
 
 // Currently have freezed implementation to these data types

@@ -43,6 +43,14 @@
         "unordered_set": "cpp",
         "functional": "cpp",
         "iterator": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "chrono": "cpp",
+        "ctime": "cpp",
+        "forward_list": "cpp",
+        "list": "cpp",
+        "map": "cpp",
+        "ratio": "cpp",
+        "set": "cpp",
+        "iomanip": "cpp"
     }
 }

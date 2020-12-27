@@ -5,12 +5,14 @@
 
 template <class T>
 class Stack {
-   T data;
-   std::unique_ptr<Stack<T>> next;
-   bool empty;
+   struct Node {
+      T data;
+      std::unique_ptr<Node> next;
+   };
+   std::unique_ptr<Node> head;
 public:
    Stack(T aData);
-   bool push(T aData);
+   void push(T aData);
    T pop();
    bool isEmpty();
    T peek();

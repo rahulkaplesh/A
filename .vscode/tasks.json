@@ -26,7 +26,7 @@
         {
             "label": "Check Leaks",
             "type": "shell",
-            "command": "valgrind bin/main_test"
+            "command": "valgrind --leak-check=full bin/main_test"
         },
     ]
  }
