@@ -38,6 +38,11 @@
         "sstream": "cpp",
         "stdexcept": "cpp",
         "streambuf": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "any": "cpp",
+        "unordered_set": "cpp",
+        "functional": "cpp",
+        "iterator": "cpp",
+        "variant": "cpp"
     }
 }

@@ -1,22 +1,14 @@
 #include "gtest/gtest.h"
 #include <stack.hpp>
 
-TEST(STACKTEST, INITIALISATION) {
-    //arrange
-    //act
-    //assert
-
+TEST(STACKINTTEST, INITIALISATION) {
    Stack<int> TestStack(10);
 
    EXPECT_EQ (TestStack.isEmpty(), false);
    EXPECT_EQ (TestStack.peek(), 10);
 }
 
-TEST(STACKTEST, PUSH) {
-    //arrange
-    //act
-    //assert
-
+TEST(STACKINTTEST, PUSH) {
    Stack<int> TestStack(10);
    TestStack.push(20);
    TestStack.push(30);
@@ -25,11 +17,7 @@ TEST(STACKTEST, PUSH) {
    EXPECT_EQ (TestStack.peek(), 30);
 }
 
-TEST(STACKTEST, POP) {
-    //arrange
-    //act
-    //assert
-
+TEST(STACKINTTEST, POP) {
    Stack<int> TestStack(10);
    TestStack.push(20);
    TestStack.push(30);
@@ -41,11 +29,7 @@ TEST(STACKTEST, POP) {
    EXPECT_EQ (TestStack.pop(), 30);
 }
 
-TEST(STACKTEST, TESTEMPTY) {
-    //arrange
-    //act
-    //assert
-
+TEST(STACKINTTEST, TESTEMPTY) {
    Stack<int> TestStack(10);
    TestStack.push(20);
 

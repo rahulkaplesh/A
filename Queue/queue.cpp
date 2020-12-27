@@ -1,39 +1,39 @@
 #include <utility>
-#include <stack.hpp>
+#include <queue.hpp>
 #include <iostream>
 
 template <class T>
-Stack<T>::Stack(T aData) {
+Queue<T>::Queue(T aData) {
    data = aData;
    empty = false;
 }
 
 template <class T>
-bool Stack<T>::push(T aData) {
+bool Queue<T>::enqueue(T aData) {
    bool added = true;
    if (next != nullptr) {
-      added &= next->push(data);
+      added &= next->enqueue(aData);
    } else {
       if (empty == false) {
-         next = std::make_unique<Stack<T>>(data);
+         next = std::make_unique<Queue<T>>(aData);
       } else {
          empty = false;
+         data = aData;
       }
    }
-   data = aData;
    return added;
 }
 
 template <class T>
-T Stack<T>::pop() {
+T Queue<T>::dequeue() {
    if (empty == true) {
-      std::cout << "Stack is empty" << std::endl;
+      std::cout << "Queue is empty !!" << std::endl;
       return T();
    }
    T dataToBeReturned = data;
    if (next != nullptr) {
-      data = next->pop();
-      if (next->isEmpty() == true ) {
+      data = next->dequeue();
+      if (next->isEmpty() == true) {
          next.reset();
       }
    } else {
@@ -43,18 +43,18 @@ T Stack<T>::pop() {
 }
 
 template <class T>
-T Stack<T>::peek() {
+T Queue<T>::peek() {
    if (empty == false) {
       return data;
    }
 }
 
 template <class T>
-bool Stack<T>::isEmpty() {
+bool Queue<T>::isEmpty() {
    return empty;
 }
 
 // Currently have freezed implementation to these data types
-template class Stack<int>;
-template class Stack<float>;
-template class Stack<char>;
+template class Queue<int>;
+template class Queue<float>;
+template class Queue<char>;

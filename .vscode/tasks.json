@@ -22,6 +22,11 @@
             "label": "RUN TESTS",
             "type": "shell",
             "command": "bin/main_test"
-        }
+        },
+        {
+            "label": "Check Leaks",
+            "type": "shell",
+            "command": "valgrind bin/main_test"
+        },
     ]
  }
